@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace AjmeraBookStoreManagement.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("v1/[controller]")]
     public class BookController : ControllerBase
     {
         private readonly ILogger<BookController> _logger;

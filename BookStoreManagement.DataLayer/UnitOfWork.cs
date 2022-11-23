@@ -60,10 +60,9 @@ namespace BookStoreManagement.DataLayer
 
         public void Dispose()
         {
-            Transaction.Dispose();
             Context.Dispose();
         }
 
 
-    }
+  }
 }

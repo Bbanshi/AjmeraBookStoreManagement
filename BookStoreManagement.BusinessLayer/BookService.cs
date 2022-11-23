@@ -24,7 +24,6 @@ namespace BookStoreManagement.BusinessLayer
         {
             try
             {
-                UnitOfWork.BeginTran();
                 List<BookAuthorModel> responseList = new List<BookAuthorModel>();
                 string authorName = string.Empty;
                 var bookList = GetAll();
@@ -62,7 +61,6 @@ namespace BookStoreManagement.BusinessLayer
         {
             try
             {
-                UnitOfWork.BeginTran();
                 var response = new BookAuthorModel();
                 var book = UnitOfWork.Book.Get(id);
                 if (book != null)
@@ -106,8 +104,6 @@ namespace BookStoreManagement.BusinessLayer
 
         public bool AddBook(AddBookModel addBookModel)
         {
-
-            UnitOfWork.BeginTran();
             try
             {
                 Guid authorId = Guid.NewGuid();
@@ -127,7 +123,6 @@ namespace BookStoreManagement.BusinessLayer
                 catch(Exception ex)
                 {
                     _logger.LogError($"Exception While adding Author. Exception Message: {ex.Message}, StackTrace: {ex.StackTrace}");
-                    UnitOfWork.Rollback();
                     return false;
                 }
                 
@@ -148,14 +143,12 @@ namespace BookStoreManagement.BusinessLayer
                 catch(Exception ex)
                 {
                     _logger.LogError($"Exception While adding Book. Exception Message: {ex.Message}, StackTrace: {ex.StackTrace}");
-                    UnitOfWork.Rollback();
                     return false;
                 }
             }
             catch(Exception ex)
             {
                 _logger.LogError($"Exception BookService-- AddBook. Exception Message: {ex.Message}, StackTrace: {ex.StackTrace}");
-                UnitOfWork.Rollback();
                 return false;
             }
             return true;
